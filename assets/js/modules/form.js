@@ -38,19 +38,28 @@ function initializeForm(formModal) {
         return `application_data_${characterName.replace(/\s/g, '_')}`;
     }
 
+    const ageSelect = formModal.querySelector('#age-select-wrapper .custom-select');
+    const charCharacter = formModal.querySelector('#char-character');
+    const charBefore = formModal.querySelector('#char-before');
+    const charWeakness = formModal.querySelector('#char-weakness');
+    const charAfter = formModal.querySelector('#char-after');
+    const charExtra = formModal.querySelector('#char-extra');
+    const charAppearance = formModal.querySelector('#char-appearance');
+    const charTgLogin = formModal.querySelector('#char-tg-login');
+
     function saveFormData() {
         const characterName = nameHiddenInput.value;
         if (!characterName) return;
         const data = {
-            age: formModal.querySelector('#age-select-wrapper .custom-select').dataset.value || '',
-            character: formModal.querySelector('#char-character').value,
-            before: formModal.querySelector('#char-before').value,
+            age: ageSelect.dataset.value || '',
+            character: charCharacter.value,
+            before: charBefore.value,
             group: groupHiddenInput.value,
-            weakness: formModal.querySelector('#char-weakness').value,
-            after: formModal.querySelector('#char-after').value,
-            extra: formModal.querySelector('#char-extra').value,
-            appearance: formModal.querySelector('#char-appearance').value,
-            tgLogin: formModal.querySelector('#char-tg-login').value,
+            weakness: charWeakness.value,
+            after: charAfter.value,
+            extra: charExtra.value,
+            appearance: charAppearance.value,
+            tgLogin: charTgLogin.value,
         };
         localStorage.setItem(getStorageKey(characterName), JSON.stringify(data));
     }

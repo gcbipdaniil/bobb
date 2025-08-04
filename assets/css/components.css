@@ -2,6 +2,19 @@
 /*          СТИЛИ ДЛЯ ПЕРЕИСПОЛЬЗУЕМЫХ КОМПОНЕНТОВ         */
 /* ======================================================= */
 
+/* --- Visually Hidden Class for Accessibility --- */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* --- Общие стили модальных окон --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;
