@@ -38,13 +38,13 @@ if (isset($update['callback_query'])) {
 
     if (!in_array($chatId, TELEGRAM_ADMIN_IDS)) exit();
 
-    list($command, $payload) = explode('_', $data, 2);
-
-    if ($command === 'cancel') {
+    if ($data === 'cancel_') {
         deleteMessage($chatId, $messageId);
         answerCallbackQuery($callbackQuery['id']);
         exit();
     }
+
+    list($command, $payload) = explode('_', $data, 2);
 
     if ($command === 'selectsorolchar') {
         $characterName = $payload;
@@ -135,7 +135,7 @@ if (isset($update['callback_query'])) {
             editMessageText($chatId, $messageId, $message);
             answerCallbackQuery($callbackQuery['id'], 'Заявка одобрена!');
             break;
-        case 'reject': case 'delete':
+        case 'reject':
             $character = findCharacterByName($charactersJsonPath, $characterName);
             if ($character && $character['status'] !== 'reserved') {
                 editMessageText($chatId, $messageId, "⚠️ *Внимание!* Эта заявка уже была обработана. Текущий статус: " . escapeMarkdown($character['status']));
@@ -145,8 +145,15 @@ if (isset($update['callback_query'])) {
             $result = updateCharacterStatus($charactersJsonPath, $characterName, 'free', null, null, null);
             if ($result) {
                 deleteUserFolder($usersBasePath . $folderName);
-                $actionText = ($command === 'reject') ? 'отклонена' : 'удалена';
-                editMessageText($chatId, $messageId, "🗑️ Анкета для *" . escapeMarkdown($characterName) . "* была {$actionText}. Роль свободна, данные удалены.");
+                editMessageText($chatId, $messageId, "🗑️ Анкета для *" . escapeMarkdown($characterName) . "* была отклонена. Роль свободна, данные удалены.");
+                answerCallbackQuery($callbackQuery['id'], 'Анкета отклонена!');
+            } else { answerCallbackQuery($callbackQuery['id'], 'Ошибка: Персонаж не найден!'); }
+            break;
+        case 'delete':
+            $result = updateCharacterStatus($charactersJsonPath, $characterName, 'free', null, null, null);
+            if ($result) {
+                deleteUserFolder($usersBasePath . $folderName);
+                editMessageText($chatId, $messageId, "🗑️ Анкета для *" . escapeMarkdown($characterName) . "* была удалена. Роль свободна, данные удалены.");
                 answerCallbackQuery($callbackQuery['id'], 'Анкета удалена!');
             } else { answerCallbackQuery($callbackQuery['id'], 'Ошибка: Персонаж не найден!'); }
             break;
