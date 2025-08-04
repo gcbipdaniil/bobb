@@ -1,0 +1,187 @@
+/* ======================================================= */
+/*             СТИЛИ ДЛЯ СТРАНИЦЫ ПРАВИЛ                   */
+/* ======================================================= */
+
+#page-rules .main-container {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.rules-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* --- Стили для заголовков --- */
+.rules-title, .rules-subtitle {
+    text-align: center;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.rules-title {
+    font-size: 2.5rem;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.rules-subtitle {
+    font-size: 1.8rem;
+    margin-top: 60px;
+    color: #a7c957; /* A greenish accent */
+}
+
+
+/* --- Timeline Layout --- */
+.rules-section {
+    position: relative;
+    padding: 20px 0;
+}
+
+.rules-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.rule-item {
+    padding: 20px 30px;
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    width: calc(50% - 40px);
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.rule-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rule-item:nth-child(odd) {
+    left: 0;
+    margin-left: 0;
+}
+
+.rule-item:nth-child(even) {
+    left: 50%;
+    margin-left: 40px;
+}
+
+/* Timeline circles and lines */
+.rule-item::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.rule-item:nth-child(odd)::after {
+    right: -31px;
+}
+
+.rule-item:nth-child(even)::after {
+    left: -30px;
+}
+
+.rule-item:hover::after {
+    background-color: var(--accent-color);
+}
+
+/* --- Rule Importance Styling --- */
+.rule-item[data-importance="critical"] {
+    border-color: rgba(255, 82, 82, 0.5);
+    box-shadow: 0 0 15px rgba(255, 82, 82, 0.2);
+}
+
+.rule-item[data-importance="critical"]::after {
+    border-color: rgba(255, 82, 82, 0.8);
+    background-color: rgba(255, 82, 82, 0.2);
+}
+.rule-item[data-importance="critical"]:hover::after {
+    background-color: #ff5252;
+    border-color: #ff5252;
+}
+
+.rule-item p {
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+    .rules-section::before {
+        left: 20px;
+    }
+
+    .rule-item {
+        width: calc(100% - 40px);
+        margin: 0 0 20px 40px;
+        left: 0 !important;
+    }
+
+    .rule-item:nth-child(odd),
+    .rule-item:nth-child(even) {
+        left: 0;
+        margin-left: 40px;
+    }
+
+    .rule-item::after {
+        left: -30px !important;
+        right: auto !important;
+    }
+
+    .rules-title {
+        font-size: 2rem;
+    }
+    .rules-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #page-rules .main-container {
+        padding: 20px 15px 60px;
+    }
+
+    .rules-section::before {
+        left: 10px;
+    }
+
+    .rule-item {
+        width: calc(100% - 25px);
+        margin-left: 25px;
+        padding: 15px 20px;
+    }
+    .rule-item:nth-child(odd),
+    .rule-item:nth-child(even) {
+        margin-left: 25px;
+    }
+
+    .rule-item::after {
+        left: -25px !important;
+        width: 15px;
+        height: 15px;
+    }
+}

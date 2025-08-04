@@ -1,0 +1,116 @@
+/* ======================================================= */
+/*          СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (index.html)        */
+/* ======================================================= */
+
+#activity-rating-widget {
+    padding: 20px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#activity-rating-widget h2 {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.top-3-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#show-all-rating-btn {
+    margin-top: 10px;
+}
+
+.leaderboard-content {
+    width: 95%;
+    max-width: 700px;
+    height: 90vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-header {
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.time-period-selector, .rating-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    background-color: rgba(0,0,0,0.2);
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.time-period-selector .time-btn, .rating-tabs .tab-btn {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.time-period-selector .time-btn.active, .rating-tabs .tab-btn.active {
+    background-color: rgba(48, 72, 40, 0.8);
+    color: #fff;
+    font-weight: 700;
+}
+
+.leaderboard-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.leaderboard-list-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-list-item:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-rank {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    width: 40px;
+    text-align: center;
+}
+
+.leaderboard-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.leaderboard-name {
+    flex-grow: 1;
+    font-weight: 600;
+}
+
+.leaderboard-score {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Roboto Mono', monospace;
+}

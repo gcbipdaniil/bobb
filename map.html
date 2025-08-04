@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная Карта</title>
+    <link rel="stylesheet" href="/assets/css/map-page.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div id="map-loading-indicator" class="map-loading-indicator">
+        <div class="spinner"></div>
+    </div>
+    <div class="map-controls">
+        <div class="layer-toggle">
+            <label class="toggle-switch">
+                <input type="checkbox" id="layer-toggle-checkbox">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-label">Метро</span>
+        </div>
+    </div>
+    <div id="map-container" class="map-container">
+        <!-- Interactive map will be loaded here by map-page.js -->
+    </div>
+
+    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+    <script src="/assets/js/map-page.js"></script>
+
+    <!-- Location Card Modal -->
+    <div id="location-card-modal" class="location-card-overlay">
+        <div class="location-card-content">
+            <button id="location-card-close" class="location-card-close-btn">&times;</button>
+            <div id="location-card-gallery" class="location-card-gallery">
+                <div id="location-card-main-image" class="location-card-main-image"></div>
+                <div id="location-card-thumbnails" class="location-card-thumbnails"></div>
+            </div>
+            <div class="location-card-info">
+                <h3 id="location-card-title"></h3>
+                <p id="location-card-description"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

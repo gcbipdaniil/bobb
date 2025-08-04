@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apocalypsis - Правила</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/pages/rules.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://unpkg.com/page/page.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body id="page-rules">
+    <div id="nav-overlay"></div>
+    <nav id="side-nav">
+        <ul>
+            <li><a href="/" class="nav-link">Главная</a></li>
+            <li><a href="/charters" class="nav-link">Персонажи</a></li>
+            <li><a href="/groups" class="nav-link">Группировки</a></li>
+            <li><a href="/rules" class="nav-link active">Правила</a></li>
+        </ul>
+    </nav>
+    <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo-container"><img src="/assets/images/logo.png" alt="Loading Logo" class="preloader-logo"></div>
+            <p class="loading-text" data-text="Загрузка...">Загрузка...</p>
+        </div>
+    </div>
+    <div class="main-container">
+        <header>
+            <div class="logo">
+                <img src="/assets/images/logo.png" alt="Apocalypsis Logo">
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div class="rules-container">
+                <h1 class="rules-title">Правила группы</h1>
+
+                <section class="rules-section">
+                    <div class="rule-item" data-importance="critical">
+                        <p>Возрастное ограничение: строго 14+</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>В группе царит дружелюбная атмосфера. За провокации, ненависть, травлю — мут, варн или кик по решению администрации. Оскорбления администрации — бан.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Перед вступлением рекомендуется обсудить с админом потенциальные пейринги, чтобы было интереснее участвовать в игре.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Если сложно влиться, обращайтесь к владельцу или админам — они помогут.</p>
+                    </div>
+                    <div class="rule-item" data-importance="critical">
+                        <p>Анкета обязательна. На её оформление даётся 3 дня. Шаблон — в информационной группе.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Посты должны быть от 20 строк (на телефоне), с грамотностью выше 7/10 и ясным смыслом.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>В начале или конце поста желательно добавлять хештег (#X, #ветка_X_Y), чтобы облегчить навигацию.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Один участник — не более двух ролей.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Любые пейринги разрешены (кроме педофилии и инцеста). Осуждение гета, яоя, юри — запрещено.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Запрещены спам, бессмысленные сообщения, однотипные стикеры. Боты — в меру.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>В ролевой чат — только ролевые посты.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Реклама других групп — только с одобрения администрации.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Персонажа можно сменить только с разрешения администрации и максимум дважды.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Чрезмерные оскорбления, в том числе мат — запрещены. Следите за речью.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Оригинальные персонажи (OC) запрещены.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Запрещено добавлять участников без согласования с Тигнари. Приглашения — только через администрацию.</p>
+                    </div>
+                    <div class="rule-item" data-importance="critical">
+                        <p>Игнорирование администрации и её занесение в чёрный список — нарушение.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Просим сообщать причину ухода. Мы всегда рады видеть вернувшихся.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Арты и посты 18+ разрешены без цензуры, но с предупреждением в начале.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Обсуждение интимных тем во флуде — ограничено.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>За повторные нарушения после предупреждения — удаление из группы.</p>
+                    </div>
+                     <div class="rule-item" data-importance="normal">
+                        <p>Политика, война, спорные темы — запрещены.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Устные домогательства, оскорбления по нацпризнаку — запрещены.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Пропаганда наркотиков и запрещённых идеологий — запрещена.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Жалуйтесь на неподобающее поведение в ЛС (интим, оскорбления, политика) — это нарушение.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Личная информация других людей без разрешения — строго запрещена.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Открепление сообщений администрации — варн.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>В группе максимум 30 участников — ради комфорта.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Администрация принимает окончательные решения, но не в корыстных целях.</p>
+                    </div>
+                    <div class="rule-item" data-importance="critical">
+                        <p>3 варна = кик</p>
+                    </div>
+                </section>
+
+                <h2 class="rules-subtitle">Активность:</h2>
+
+                <section class="rules-section">
+                    <div class="rule-item" data-importance="normal">
+                        <p>Пост — минимум один раз в 2 недели.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Сообщения — около 100 в неделю (±10 допустимо).</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Без флуда: два поста. С половиной нормы — один пост.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Уходите? Предупредите, возьмите рест.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Уход из группы — напишите роль, желательно причину, и отметьте Тигнари.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Рест — не позже, чем за день до чистки. Длительность — до 3 недель. Возможны исключения.</p>
+                    </div>
+                    <div class="rule-item" data-importance="critical">
+                        <p>Неактив более 7 дней без предупреждения — кик.</p>
+                    </div>
+                    <div class="rule-item" data-importance="critical">
+                        <p>Чистка — каждое воскресенье вечером. Статистика за 3 дня до неё. Новички первую неделю не трогаются, но если они молчат — удаление возможно.</p>
+                    </div>
+                    <div class="rule-item" data-importance="normal">
+                        <p>Возможны отмены чисток — владелец сообщает об этом отдельно.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals and other overlays would be here, but they are loaded with the main page, so no need to duplicate -->
+
+    <script src="/assets/js/modules/custom-alert.js" defer></script>
+    <script src="/assets/js/modules/charter-view.js" defer></script>
+    <script src="/assets/js/modules/tgcheck.js" defer></script>
+    <script src="/assets/js/modules/spellchecker.js" defer></script>
+    <script src="/assets/js/modules/form.js" defer></script>
+    <script src="/assets/js/modules/image-processor.js" defer></script>
+    <script src="/assets/js/pages/rules.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

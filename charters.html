@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apocalypsis - Персонажи</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/pages/charters.css">
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://unpkg.com/page/page.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body id="page-charters">
+    <div id="nav-overlay"></div>
+    <nav id="side-nav">
+        <ul>
+            <li><a href="/" class="nav-link">Главная</a></li>
+            <li><a href="/charters" class="nav-link active">Персонажи</a></li>
+            <li><a href="/groups" class="nav-link">Группировки</a></li>
+            <li><a href="/rules" class="nav-link">Правила</a></li>
+        </ul>
+    </nav>
+    <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo-container"><img src="/assets/images/logo.png" alt="Loading Logo" class="preloader-logo"></div>
+            <p class="loading-text" data-text="Загрузка...">Загрузка...</p>
+        </div>
+    </div>
+    <div class="main-container">
+        <header>
+            <div class="logo">
+                <img src="/assets/images/logo.png" alt="Apocalypsis Logo">
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div class="character-controls-container">
+                <div class="search-wrapper">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" id="character-search" placeholder="Найти персонажа...">
+                </div>
+                <div class="sort-wrapper">
+                    <div id="custom-sort-select" class="custom-sort-select">
+                        <div class="custom-sort-trigger">
+                            <span>По категориям</span>
+                            <span class="material-symbols-outlined arrow">expand_more</span>
+                        </div>
+                        <div class="custom-sort-options">
+                            <div class="custom-sort-option selected" data-value="category">По категориям</div>
+                            <div class="custom-sort-option" data-value="alphabet">По алфавиту (А-Я)</div>
+                            <div class="custom-sort-option" data-value="status">По статусу</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="character-grid">
+            </div>
+        </main>
+    </div>
+    <div id="form-modal" class="modal-overlay">
+        <div class="modal-content form-modal-content">
+            <div class="form-view-switcher">
+                <div id="form-view-application" class="form-view active">
+                    <button class="modal-close-btn" aria-label="Закрыть"><span class="material-symbols-outlined">close</span></button>
+                    <h2>Анкета Персонажа</h2>
+                    <div class="form-progress-bar"><div class="progress-bar__fill"></div><span class="progress-bar__percentage">0%</span></div>
+                    <div class="modal-body">
+                        <form id="character-application-form" novalidate>
+                            <div class="form-group">
+                                <label><span class="label-text">Персонаж</span></label>
+                                <div id="char-name-display" class="form-input readonly"></div>
+                                <input type="hidden" id="char-name-hidden" data-validate="required">
+                            </div>
+                            <div class="form-group">
+                                <label><span class="label-text">Возраст<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+                                <div id="age-select-wrapper" class="custom-select-wrapper" data-validate="select"><div class="custom-select"><div class="custom-select__trigger"><span>Выберите возраст...</span></div><div class="custom-options"></div></div></div><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="char-character"><span class="label-text">Характер<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+                                <button type="button" class="fullscreen-toggle-btn" aria-label="Во весь экран"><span class="material-symbols-outlined">fullscreen</span></button>
+                                <textarea id="char-character" class="form-textarea countable-textarea" data-validate="required" placeholder="Опишите характер вашего персонажа."></textarea><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="char-before"><span class="label-text">До апокалипсиса<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+                                <button type="button" class="fullscreen-toggle-btn" aria-label="Во весь экран"><span class="material-symbols-outlined">fullscreen</span></button>								
+                                <textarea id="char-before" class="form-textarea countable-textarea" data-validate="required" placeholder="Где учился, работал, какие были хобби..."></textarea><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label><span class="label-text">Группировка</span><div class="validation-icon"></div></label>
+                                <div id="group-selector-trigger" class="form-input pseudo-input" data-validate="optional">Выберите группировку...</div>
+                                <input type="hidden" id="char-group-hidden-input" data-validate="optional"><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="char-weakness"><span class="label-text">Слабости и страхи<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+                                <button type="button" class="fullscreen-toggle-btn" aria-label="Во весь экран"><span class="material-symbols-outlined">fullscreen</span></button>
+                                <textarea id="char-weakness" class="form-textarea countable-textarea" data-validate="required" placeholder="Перечислите слабости и страхи персонажа."></textarea><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="char-after"><span class="label-text">После апокалипсиса<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+                                <button type="button" class="fullscreen-toggle-btn" aria-label="Во весь экран"><span class="material-symbols-outlined">fullscreen</span></button>								
+                                <textarea id="char-after" class="form-textarea countable-textarea" data-validate="required" placeholder="Как выживает, какие цели имеет..."></textarea><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="char-extra"><span class="label-text">Что-нибудь от себя</span><div class="validation-icon"></div></label>
+                                <button type="button" class="fullscreen-toggle-btn" aria-label="Во весь экран"><span class="material-symbols-outlined">fullscreen</span></button>								
+                                <textarea id="char-extra" class="form-textarea countable-textarea" data-validate="optional" placeholder="Привычки, хэды, интересные факты..."></textarea><div class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="char-appearance"><span class="label-text">Внешность (по желанию)</span><div class="validation-icon"></div></label>
+                                <button type="button" class="fullscreen-toggle-btn" aria-label="Во весь экран"><span class="material-symbols-outlined">fullscreen</span></button>								
+                                <textarea id="char-appearance" class="form-textarea countable-textarea" data-validate="optional" placeholder="У нас остаются элементы из игры: рога, хвосты и т.д."></textarea><div class="error-message"></div>
+                            </div>
+							<div class="form-group">
+								<label for="char-tg-login"><span class="label-text">Логин Telegram<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+								<input type="text" id="char-tg-login" class="form-input" data-validate="telegram" placeholder="user123 или @user123"><div class="error-message"></div>
+							</div>								
+                            <div class="form-group file-upload-group">
+                                <label><span class="label-text">Арты (до 4 шт.)<span class="required-asterisk">*</span></span><div class="validation-icon"></div></label>
+                                <div id="art-preview-container" class="art-preview-container">
+                                    <label for="char-art-upload" class="art-add-btn"><span class="material-symbols-outlined">add_photo_alternate</span><span>Добавить</span></label>
+                                </div>
+                                <input type="file" id="char-art-upload" multiple accept="image/*,.webp" data-validate="required" style="display: none;"><div class="error-message"></div>
+                            </div>		
+							<div id="form-summary-errors" class="form-summary-errors"></div>
+                            <button type="submit" id="submit-application" class="btn">Отправить анкету</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="form-view-groups" class="form-view">
+                    <button class="modal-close-btn back-to-form" aria-label="Вернуться к анкете"><span class="material-symbols-outlined">arrow_back</span></button>
+                    <h2>Выберите Группировку</h2>
+                    <div id="form-groups-slider" class="form-groups-slider"><div class="slider-track"></div><div class="slider-pagination"></div><button class="slider-nav-btn prev">◀</button><button class="slider-nav-btn next">▶</button></div>
+                    <div class="form-groups-controls"><button type="button" id="select-this-group" class="btn">Выбрать эту группу</button><button type="button" id="select-no-group" class="btn btn-secondary">Я одиночка (Нет группы)</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="textarea-fullscreen-overlay">
+        <div class="fullscreen-textarea-container">
+            <button id="fullscreen-textarea-close" class="modal-close-btn">×</button>
+            <textarea id="fullscreen-textarea"></textarea>
+        </div>
+    </div>
+	<div id="tg-confirm-modal" class="modal-overlay">
+		<div class="modal-content tg-confirm-content">
+			<div class="tg-profile">
+				<img src="/assets/images/tg_avatar_placeholder.png" alt="Avatar" id="tg-avatar-preview">
+				<div class="tg-profile-info">
+					<span id="tg-name-preview" class="tg-name">Имя Фамилия</span>
+					<span id="tg-login-preview" class="tg-login">@user123</span>
+				</div>
+			</div>
+			<h3>Это вы?</h3>
+			<p class="tg-notice">Если данные верны, администратор свяжется с вами по этому аккаунту в случае одобрения анкеты.</p>
+			<div class="tg-confirm-actions">
+				<button id="tg-confirm-yes" class="btn">Да, это я</button>
+				<button id="tg-confirm-no" class="btn btn-secondary">Нет, изменить</button>
+			</div>
+		</div>
+	</div>
+    <div id="custom-alert-overlay" class="custom-alert-overlay">
+        <div class="custom-alert-box">
+            <h3 id="custom-alert-title">Заголовок</h3>
+            <p id="custom-alert-message">Текст сообщения здесь.</p>
+            <div id="custom-alert-buttons" class="custom-alert-buttons"></div>
+        </div>
+    </div>
+	<div id="captcha-modal-overlay" class="custom-alert-overlay">
+		<div class="custom-alert-box">
+			<h3 id="captcha-modal-title">Проверка безопасности</h3>
+			<p id="captcha-modal-message">Пожалуйста, подождите, мы проверяем ваше подключение.</p>
+			<div id="captcha-widget-container" class="turnstile-container"></div>
+			<div id="captcha-status-text" class="captcha-status-text"></div>
+		</div>
+	</div>  
+    <div id="char-view-modal" class="modal-overlay char-view-modal">
+        <div class="char-view-content-wrapper">
+            <div class="char-view-backdrop"><div id="char-view-backdrop-image" class="char-view-backdrop-image"></div></div>
+            <div class="modal-content char-view-content">
+                <button class="modal-close-btn" aria-label="Закрыть"><span class="material-symbols-outlined">close</span></button>
+                <div class="char-view-scroll-container">
+                    <div class="char-view-main-panel">
+                        <h2 id="char-view-name" class="char-view-name"></h2>
+                        <div class="char-view-gallery-container">
+                            <div id="char-view-slider" class="char-view-slider"></div>
+                            <button class="char-view-nav-btn prev">◀</button>
+                            <button class="char-view-nav-btn next">▶</button>
+                            <div id="char-view-pagination" class="char-view-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="char-view-info-panel">
+                        <div class="char-view-vitals">
+                            <ul class="char-view-meta">
+                                <li><strong>Возраст:</strong><span id="char-view-age"></span></li>
+                                <li><strong>Группировка:</strong><span id="char-view-group"></span></li>
+                                <li><strong>Сорол:</strong><span id="char-view-sorol"></span></li>
+                            </ul>
+                        </div>
+                        <div class="char-view-story-tabs">
+                            <nav class="tab-nav">
+                                <button data-tab="tab-character" class="tab-btn active">Характер</button>
+                                <button data-tab="tab-history" class="tab-btn">История</button>
+                                <button data-tab="tab-notes" class="tab-btn">Заметки</button>
+                            </nav>
+                            <div class="tab-content">
+                                <div id="tab-character" class="tab-pane active"><p id="char-view-character"></p></div>
+                                <div id="tab-history" class="tab-pane">
+                                    <div class="story-section"><h3>До апокалипсиса</h3><p id="char-view-before"></p></div>
+                                    <div class="story-section"><h3>После апокалипсиса</h3><p id="char-view-after"></p></div>
+                                </div>
+                                <div id="tab-notes" class="tab-pane">
+                                    <div class="story-section"><h3>Слабости и страхи</h3><p id="char-view-weakness"></p></div>
+                                    <div class="story-section"><h3>Внешность</h3><p id="char-view-appearance"></p></div>
+                                    <div class="story-section"><h3>Что-нибудь от себя</h3><p id="char-view-extra"></p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/modules/custom-alert.js" defer></script>
+    <script src="/assets/js/modules/charter-view.js" defer></script>
+    <script src="/assets/js/modules/tgcheck.js" defer></script>
+    <script src="/assets/js/modules/spellchecker.js" defer></script>
+    <script src="/assets/js/modules/form.js" defer></script>
+    <script src="/assets/js/modules/image-processor.js" defer></script>
+    <script src="/assets/js/pages/charters.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
+	
+</body>
+</html>

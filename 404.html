@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Rating Widget Test</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 40px;
+            margin: 0;
+        }
+        .rating-widget {
+            background: #2c2c2c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .rating-widget-header h2 {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+        }
+        .rating-list { display: flex; gap: 15px; }
+        .rating-list.horizontal { flex-direction: row; justify-content: space-around; }
+        .rating-list.vertical {
+            flex-direction: column;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease;
+        }
+        .rating-list.vertical.visible { max-height: 2000px; opacity: 1; margin-top: 20px; }
+        .character-entry {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .rating-list.horizontal .character-entry { flex-direction: column; flex: 1; padding: 15px 10px; }
+        .character-entry:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .character-entry .rank {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #d4af37;
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .character-entry .image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+        .rating-list.horizontal .character-entry .image { width: 80px; height: 80px; margin-bottom: 10px; }
+        .character-entry .info { display: flex; flex-direction: column; flex-grow: 1; gap: 4px; }
+        .rating-list.horizontal .character-entry .info { align-items: center; text-align: center; }
+        .character-entry .name { font-weight: 600; color: #ffffff; font-size: 0.95rem; }
+        .character-entry .score { font-size: 0.8rem; color: #a5d6a7; }
+        #rating-show-all-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            color: #e0e0e0;
+            background: #3a3a3a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #rating-show-all-btn:hover { background: #4a4a4a; border-color: rgba(255, 255, 255, 0.3); transform: scale(1.02); }
+        @keyframes slide-in-from-top {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .rating-list.vertical .character-entry {
+            opacity: 0;
+            animation: slide-in-from-top 0.5s forwards;
+            animation-delay: calc(var(--animation-order) * 60ms);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="rating-widget-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('rating-widget-container');
+            if (!container) {
+                console.error('Rating widget container not found.');
+                return;
+            }
+
+            const widget = document.createElement('div');
+            widget.className = 'rating-widget';
+            widget.innerHTML = '<p style="text-align: center;">Загрузка рейтинга активности...</p>';
+
+            container.innerHTML = '';
+            container.appendChild(widget);
+
+            function createCharacterHtml(character, index, isFullList) {
+                const uniqueId = character.folder || character.player;
+                const rankHtml = isFullList ? `<span class="rank">#${index + 1}</span>` : '';
+                const scoreHtml = isFullList ? `<div class="score">Посты: ${character.posts} | Флуд: ${character.flood} | Индекс: ${character.overall.toFixed(1)}</div>` : '';
+                const imageUrl = `https://apocalypsis.crewcompany.top${character.image}`;
+                return `
+                    <div class="character-entry" data-id="${uniqueId}" style="--animation-order: ${index};">
+                        ${rankHtml}
+                        <img src="${imageUrl}" alt="${character.name}" class="image">
+                        <div class="info">
+                            <div class="name">${character.name}</div>
+                            ${scoreHtml}
+                        </div>
+                    </div>
+                `;
+            }
+
+            function render(data) {
+                const weeklyData = data.weekly;
+                if (!weeklyData || weeklyData.length === 0) {
+                    widget.innerHTML = '<p style="text-align:center;">Нет данных для отображения.</p>';
+                    return;
+                }
+
+                widget.innerHTML = `
+                    <div class="rating-widget-header">
+                        <h2>Рейтинг Активности (Неделя)</h2>
+                    </div>
+                    <div id="rating-top3-list" class="rating-list horizontal"></div>
+                    <button id="rating-show-all-btn" style="display: none;">Показать всех</button>
+                    <div id="rating-full-list" class="rating-list vertical"></div>
+                `;
+
+                const top3Container = widget.querySelector('#rating-top3-list');
+                const fullListContainer = widget.querySelector('#rating-full-list');
+                const showAllBtn = widget.querySelector('#rating-show-all-btn');
+
+                const top3Data = weeklyData.slice(0, 3);
+                top3Container.innerHTML = top3Data.map((char, i) => createCharacterHtml(char, i, false)).join('');
+
+                if (weeklyData.length > 3) {
+                    showAllBtn.style.display = 'block';
+                    showAllBtn.addEventListener('click', () => {
+                        fullListContainer.innerHTML = weeklyData.map((char, i) => createCharacterHtml(char, i, true)).join('');
+                        fullListContainer.classList.add('visible');
+                        showAllBtn.style.display = 'none';
+                    });
+                }
+            }
+
+            try {
+                const apiUrl = 'https://apocalypsis.crewcompany.top/api/get_activity_rating.php?t=' + new Date().getTime();
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`Network Error: ${response.status}`);
+                const data = await response.json();
+                render(data);
+            } catch (error) {
+                console.error('Failed to initialize rating widget:', error);
+                widget.innerHTML = `<p style="text-align: center; color: red;">Не удалось загрузить рейтинг. ${error.message}</p>`;
+            }
+
+            widget.addEventListener('click', (event) => {
+                const characterCard = event.target.closest('.character-entry');
+                if (characterCard) {
+                    const characterId = characterCard.dataset.id;
+                    if (characterId) {
+                        alert(`Character clicked: ${characterId}. On the main site, this would open the character modal.`);
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

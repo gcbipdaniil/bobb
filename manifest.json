@@ -1,0 +1,21 @@
+{
+  "name": "Apocalypsis",
+  "short_name": "Apocalypsis",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#ffffff",
+  "description": "Ролевая по Genshin Impact (14+)",
+  "icons": [
+    {
+      "src": "assets/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

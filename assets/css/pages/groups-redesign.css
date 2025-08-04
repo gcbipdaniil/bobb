@@ -1,0 +1,201 @@
+/* ======================================================= */
+/*          СТИЛИ ДЛЯ СТРАНИЦЫ ГРУППИРОВОК (GRID REDESIGN)  */
+/* ======================================================= */
+
+.groups-main-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 40px 0;
+}
+
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 20px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.group-card {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-main);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.group-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(var(--theme-accent-rgb, 165, 214, 167), 0.2);
+    border-color: rgba(var(--theme-accent-rgb, 165, 214, 167), 0.5);
+}
+
+.card-image-wrapper {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+.card-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 20, 20, 0.9) 0%, rgba(20, 20, 20, 0) 50%);
+    pointer-events: none;
+}
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.group-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.card-group-type {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+.card-group-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+.card-group-description-preview {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* --- Modal Styles (V2 Redesign) --- */
+#group-modal .modal-content {
+    max-width: 950px;
+    width: 90%;
+    max-height: 90vh;
+    padding: 0;
+    background: #1a1a1a;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex; /* Use flex for the main layout */
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-background-decorative {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 50%;
+    background: linear-gradient(to bottom right, rgba(var(--theme-accent-rgb, 165, 214, 167), 0.05), rgba(var(--theme-accent-rgb, 165, 214, 167), 0));
+    pointer-events: none;
+}
+
+#group-modal .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+}
+
+#group-modal .modal-body {
+    display: flex;
+    flex-direction: column; /* Mobile-first: stacked layout */
+    width: 100%;
+    height: 100%;
+}
+
+#group-modal .modal-image-container {
+    flex-shrink: 0;
+    height: 250px; /* Mobile-first height */
+    overflow: hidden;
+}
+#group-modal #modal-group-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#group-modal .modal-text-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0; /* Flexbox fix for overflow */
+}
+
+#group-modal #modal-group-name {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+#group-modal #modal-group-type {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--theme-accent);
+    background-color: rgba(var(--theme-accent-rgb, 165, 214, 167), 0.1);
+    border: 1px solid rgba(var(--theme-accent-rgb, 165, 214, 167), 0.3);
+    align-self: flex-start;
+}
+#group-modal #modal-group-description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    overflow-y: auto;
+    flex-grow: 1;
+    text-align: left;
+    padding-right: 10px; /* Space for scrollbar, even if invisible */
+    /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+#group-modal #modal-group-description::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- Responsiveness (Tablet and Desktop) --- */
+@media (min-width: 768px) {
+    #group-modal .modal-body {
+        flex-direction: row; /* Switch to side-by-side layout */
+    }
+    #group-modal .modal-image-container {
+        flex: 0 0 40%;
+        height: auto;
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    }
+    #group-modal .modal-text-content {
+        flex: 1 1 60%;
+        padding: 50px;
+    }
+    #group-modal #modal-group-name {
+        font-size: 2.8rem;
+    }
+}

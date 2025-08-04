@@ -1,0 +1,16 @@
+{
+    "weekly": {
+        "flood_group": {
+            "lobstertainment": 2
+        },
+        "posts_group": []
+    },
+    "last_reset_weekly": "2025-32",
+    "monthly": {
+        "flood_group": {
+            "lobstertainment": 2
+        },
+        "posts_group": []
+    },
+    "last_reset_monthly": "2025-08"
+}

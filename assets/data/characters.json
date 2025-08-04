@@ -1,0 +1,596 @@
+{
+    "categories": [
+        {
+            "title": "Близнецы",
+            "characters": [
+                {
+                    "name": "Итэр",
+                    "status": "taken",
+                    "image": "\/users\/lobstertainment_20250804_035556\/1981fd39-11a8-411a-bcfd-4fcffd214a20.webp",
+                    "folder": "lobstertainment_20250804_035556",
+                    "player": "@@lobstertainment"
+                },
+                {
+                    "name": "Люмин",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Пиро",
+            "characters": [
+                {
+                    "name": "Эмбер",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сян Лин",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Беннет",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Дилюк",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Кли",
+                    "status": "taken",
+                    "image": "\/users\/ttoplp_20250728_044641\/photo_2024-03-08_02-13-34.webp",
+                    "folder": "ttoplp_20250728_044641",
+                    "player": "@ttoplp"
+                },
+                {
+                    "name": "Синь Янь",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ху Тао",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Янь Фэй",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ёимия",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Тома",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Дэхья",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Лини",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ка Мин",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Шеврёз",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Мавуика",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Гидро",
+            "characters": [
+                {
+                    "name": "Барбара",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Син Цю",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Мона",
+                    "status": "taken",
+                    "image": "\/users\/Toswaxi_20250803_212126\/photo_2025-06-19_20-28-24.webp",
+                    "folder": "Toswaxi_20250803_212126",
+                    "player": "@Toswaxi"
+                },
+                {
+                    "name": "Тарталья",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Кокоми",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Аято",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Е Лань",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Кандакия",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Нилу",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Нёвиллетт",
+                    "status": "taken",
+                    "image": "\/users\/pas1le_tien_20250730_142710\/1000026284.webp",
+                    "folder": "pas1le_tien_20250730_142710",
+                    "player": "@pas1le_tien"
+                },
+                {
+                    "name": "Фурина",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сиджвин",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Муалани",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Анемо",
+            "characters": [
+                {
+                    "name": "Сахароза",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Венти",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сяо",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Кадзуха",
+                    "status": "taken",
+                    "image": "\/users\/etmiilr_20250728_044229\/cada.webp",
+                    "folder": "etmiilr_20250728_044229",
+                    "player": "@etmiilr"
+                },
+                {
+                    "name": "Саю",
+                    "status": "taken",
+                    "image": "\/users\/bowlwithowl_20250803_205345\/photo_2025-06-25_22-00-01.webp",
+                    "folder": "bowlwithowl_20250803_205345",
+                    "player": "@bowlwithowl"
+                },
+                {
+                    "name": "Джинн",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Хэйдзо",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Фарузан",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Странник",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Линетт",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сянь Юнь",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Часка",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Мидзуки",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Электро",
+            "characters": [
+                {
+                    "name": "Томо",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Лиза",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Рэйзор",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Бэй Доу",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Фишль",
+                    "status": "taken",
+                    "image": "\/users\/NItsuKERU_20250803_210756\/photo_2025-06-22_21-13-57.webp",
+                    "folder": "NItsuKERU_20250803_210756",
+                    "player": "@NItsuKERU"
+                },
+                {
+                    "name": "Кэ Цин",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сара",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Райдэн",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Яэ Мико",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Синобу",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Дори",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сайно",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Клоринда",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сетос",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Оророн",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Дендро",
+            "characters": [
+                {
+                    "name": "Коллеи",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Тигнари",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Нахида",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Яо Яо",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Аль-Хайтам",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Бай Чжу",
+                    "status": "taken",
+                    "image": "\/users\/SnctTelega_20250803_214511\/photo_2025-08-03_21-44-39.webp",
+                    "folder": "SnctTelega_20250803_214511",
+                    "player": "@SnctTelega"
+                },
+                {
+                    "name": "Кавех",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Кирара",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Эмилия",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Кинич",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Крио",
+            "characters": [
+                {
+                    "name": "Кэйа",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Чун Юнь",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ци Ци",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Диона",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Гань Юй",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Розария",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Эола",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Аяка",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Элой",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Шэнь Хэ",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Лайла",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Мика",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ризли",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Фремине",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Шарлотта",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ситлали",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Гео",
+            "characters": [
+                {
+                    "name": "Нин Гуан",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Ноэлль",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Чжун Ли",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Альбедо",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Горо",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Итто",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Юнь Цзинь",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Навия",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Тиори",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Шилонен",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Качина",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        },
+        {
+            "title": "Предвестники Фатуи",
+            "characters": [
+                {
+                    "name": "Пьеро",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Капитано",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Скарамучча",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Дотторе",
+                    "status": "taken",
+                    "image": "\/users\/wth_lovely_20250803_214402\/photo_2025-02-25_16-18-48.webp",
+                    "folder": "wth_lovely_20250803_214402",
+                    "player": "@wth_lovely"
+                },
+                {
+                    "name": "Коломбина",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Пульчинелла",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Сандроне",
+                    "status": "free",
+                    "image": "empty.webp"
+                },
+                {
+                    "name": "Панталоне",
+                    "status": "taken",
+                    "image": "\/users\/Saynoloh_20250803_203348\/photo_2025-07-25_19-59-17.webp",
+                    "folder": "Saynoloh_20250803_203348",
+                    "player": "@Saynoloh"
+                },
+                {
+                    "name": "Арлекино",
+                    "status": "taken",
+                    "image": "\/users\/angeregtes_Elektron_20250803_213054\/photo_2025-03-30_18-26-13.webp",
+                    "folder": "angeregtes_Elektron_20250803_213054",
+                    "player": "@angeregtes_Elektron"
+                },
+                {
+                    "name": "Синьора",
+                    "status": "free",
+                    "image": "empty.webp"
+                }
+            ]
+        }
+    ]
+}
