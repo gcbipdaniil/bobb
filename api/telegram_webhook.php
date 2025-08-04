@@ -124,12 +124,24 @@ if (isset($update['callback_query'])) {
             answerCallbackQuery($callbackQuery['id']);
             break;
         case 'approve':
+            $character = findCharacterByName($charactersJsonPath, $characterName);
+            if ($character && $character['status'] !== 'reserved') {
+                editMessageText($chatId, $messageId, "⚠️ *Внимание!* Эта заявка уже была обработана. Текущий статус: " . escapeMarkdown($character['status']));
+                answerCallbackQuery($callbackQuery['id'], 'Заявка уже обработана.');
+                exit();
+            }
             $result = updateCharacterStatus($charactersJsonPath, $characterName, 'taken', $folderName, $anketaData['uploaded_arts'][0] ?? null, $anketaData['telegram_login']);
             $message = $result ? "✅ Анкета для *" . escapeMarkdown($characterName) . "* одобрена." : "❌ Ошибка: Персонаж *" . escapeMarkdown($characterName) . "* не найден!";
             editMessageText($chatId, $messageId, $message);
             answerCallbackQuery($callbackQuery['id'], 'Заявка одобрена!');
             break;
         case 'reject': case 'delete':
+            $character = findCharacterByName($charactersJsonPath, $characterName);
+            if ($character && $character['status'] !== 'reserved') {
+                editMessageText($chatId, $messageId, "⚠️ *Внимание!* Эта заявка уже была обработана. Текущий статус: " . escapeMarkdown($character['status']));
+                answerCallbackQuery($callbackQuery['id'], 'Заявка уже обработана.');
+                exit();
+            }
             $result = updateCharacterStatus($charactersJsonPath, $characterName, 'free', null, null, null);
             if ($result) {
                 deleteUserFolder($usersBasePath . $folderName);
