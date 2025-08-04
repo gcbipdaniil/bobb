@@ -8,10 +8,32 @@ function initializeIndexPage() {
         return;
     }
 
-    joinNowBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        page('/charters');
-    });
+    if (typeof initializeCustomAlerts === 'function') {
+        const customAlert = initializeCustomAlerts();
+        joinNowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            customAlert.show({
+                title: 'Подтверждение',
+                message: 'Перед тем как подать анкету, советуем вам ознакомиться с правилами. Это поможет вам лучше понять мир и требования к персонажу.',
+                buttons: [
+                    { text: 'К правилам', class: 'btn', value: 'rules' },
+                    { text: 'Пропустить', class: 'btn btn-secondary', value: 'charters' }
+                ]
+            }).then(result => {
+                if (result === 'rules') {
+                    page('/rules');
+                } else if (result === 'charters') {
+                    page('/charters');
+                }
+            });
+        });
+    } else {
+        console.error("Custom Alerts module not found, join button will have default behavior.");
+        joinNowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            page('/charters');
+        });
+    }
 
     const closeModalBtn = plotModal.querySelector('.modal-close-btn');
     const body = document.body;

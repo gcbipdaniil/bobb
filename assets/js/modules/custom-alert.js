@@ -76,5 +76,5 @@ function initializeCustomAlerts() {
         });
     };
 
-    return { alert, confirm };
+    return { alert, confirm, show };
 }
