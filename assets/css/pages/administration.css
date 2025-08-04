@@ -19,25 +19,51 @@
 
 .admin-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto 50px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(380px, auto);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 50px auto;
     padding: 0 20px;
+}
+
+.admin-card:nth-child(1) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+.admin-card:nth-child(2) {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+}
+.admin-card:nth-child(3) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+.admin-card:nth-child(4) {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+.admin-card:nth-child(5) {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
 }
 
 .admin-card {
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius-main);
-    background: #1a1a1a;
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .admin-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.03);
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .admin-card-bg {
@@ -111,48 +137,17 @@
     opacity: 0.8;
 }
 
-/* Glitch Effect */
-.admin-role::before, .admin-role::after,
-.admin-username::before, .admin-username::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #1a1a1a;
-    overflow: hidden;
-    opacity: 0;
+/* Subtle Text Effect on Hover */
+.admin-role, .admin-username {
+    transition: text-shadow 0.3s ease;
 }
 
-.admin-card:hover .admin-role::before,
-.admin-card:hover .admin-username::before {
-    left: 2px;
-    text-shadow: -1px 0 red;
-    animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
+.admin-card:hover .admin-role {
+    text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color);
 }
 
-.admin-card:hover .admin-role::after,
-.admin-card:hover .admin-username::after {
-    left: -2px;
-    text-shadow: -1px 0 blue;
-    animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim-1 {
-    0% { clip-path: inset(15% 0 86% 0); opacity: 1; }
-    25% { clip-path: inset(55% 0 23% 0); opacity: 1; }
-    50% { clip-path: inset(23% 0 49% 0); opacity: 1; }
-    75% { clip-path: inset(80% 0 1% 0); opacity: 1; }
-    100% { clip-path: inset(42% 0 55% 0); opacity: 1; }
-}
-
-@keyframes glitch-anim-2 {
-    0% { clip-path: inset(76% 0 1% 0); opacity: 1; }
-    25% { clip-path: inset(12% 0 50% 0); opacity: 1; }
-    50% { clip-path: inset(90% 0 3% 0); opacity: 1; }
-    75% { clip-path: inset(42% 0 19% 0); opacity: 1; }
-    100% { clip-path: inset(6% 0 91% 0); opacity: 1; }
+.admin-card:hover .admin-username {
+    text-shadow: 0 0 3px rgba(255,255,255,0.5);
 }
 
 .admin-contact-btn {
