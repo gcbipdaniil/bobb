@@ -5,7 +5,7 @@
 
 // --- КОНФИГУРАЦИЯ ---
 define('TELEGRAM_TOKEN', '8467685604:AAFY8rLzqIUfG7ZVokzfns-cd0FOp57nUBE');
-define('TELEGRAM_CHAT_ID', '1087612925'); // Admin chat
+define('TELEGRAM_ADMIN_IDS', ['1087612925', 'ANOTHER_CHAT_ID']); // Admin chats
 define('SITE_URL', 'https://apocalypsis.crewcompany.top/');
 
 // ID ГРУПП ДЛЯ ОТСЛЕЖИВАНИЯ АКТИВНОСТИ
@@ -36,7 +36,7 @@ if (isset($update['callback_query'])) {
     $messageId = $callbackQuery['message']['message_id'];
     $chatId = $callbackQuery['message']['chat']['id'];
 
-    if ($chatId != TELEGRAM_CHAT_ID) exit();
+    if (!in_array($chatId, TELEGRAM_ADMIN_IDS)) exit();
 
     list($command, $payload) = explode('_', $data, 2);
 
@@ -154,7 +154,7 @@ elseif (isset($update['message'])) {
     }
 
     // 2.1. ОБРАБОТКА КОМАНД АДМИНА
-    if (isset($message['text']) && $chatId == TELEGRAM_CHAT_ID) {
+    if (isset($message['text']) && in_array($chatId, TELEGRAM_ADMIN_IDS)) {
         $text = $message['text'];
         switch ($text) {
             case '/start':

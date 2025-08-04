@@ -6,7 +6,7 @@
 // === КОНФИГУРАЦИЯ ===
 $baseDir = '../users/'; // Папка users в корне сайта
 define('TELEGRAM_TOKEN', '8467685604:AAFY8rLzqIUfG7ZVokzfns-cd0FOp57nUBE');
-define('TELEGRAM_CHAT_ID', '1087612925');
+define('TELEGRAM_ADMIN_IDS', ['1087612925', 'ANOTHER_CHAT_ID']); // Admin chats
 define('SITE_URL', 'https://apocalypsis.crewcompany.top/');
 $secretKey = 'ES_d9169edcccb944e883c0c13f674f9d7b'; // hCaptcha Secret Key - IMPORTANT: This should be the real secret key.
 
@@ -125,7 +125,7 @@ function sendTelegramNotification($data, $folderName) {
     $summaryText .= "📞 *Игрок:* " . $escapedLogin . "\n";
     $summaryText .= "📁 *Папка:* `" . escapeMarkdown($folderName) . "`\n\n";
     $summaryText .= "Примите решение, используя кнопки ниже.";
-    sendMessageToTelegram($summaryText, $replyMarkup);
+    sendMessageToAdmins($summaryText, $replyMarkup);
 
     $fullText = "📝 *Полная анкета для " . escapeMarkdown($data['character_name'] ?? '') . "*\n";
     $fullText .= "--------------------------------------\n\n";
@@ -140,11 +140,11 @@ function sendTelegramNotification($data, $folderName) {
     if (mb_strlen($fullText, 'UTF-8') > $limit) {
         $messages = str_split_telegram($fullText, $limit);
         foreach ($messages as $index => $msg) {
-            sendMessageToTelegram("*(Часть " . ($index + 1) . "/" . count($messages) . ")*\n" . $msg);
+            sendMessageToAdmins("*(Часть " . ($index + 1) . "/" . count($messages) . ")*\n" . $msg);
             sleep(1);
         }
     } else {
-        sendMessageToTelegram($fullText);
+        sendMessageToAdmins($fullText);
     }
 
     if (!empty($data['uploaded_arts'])) {
@@ -157,7 +157,7 @@ function sendTelegramNotification($data, $folderName) {
         if (!empty($media)) {
             $media[0]['caption'] = "Арты для анкеты персонажа *" . escapeMarkdown($data['character_name'] ?? 'Не указано') . "*";
             $media[0]['parse_mode'] = 'Markdown';
-            sendMediaGroupToTelegram($media);
+            sendMediaGroupToAdmins($media);
         }
     }
 }
@@ -200,9 +200,9 @@ function escapeMarkdown($text) {
     return $text;
 }
 
-function sendMessageToTelegram($message, $replyMarkup = null) {
+function sendMessageToTelegram($chatId, $message, $replyMarkup = null) {
     $url = "https://api.telegram.org/bot" . TELEGRAM_TOKEN . "/sendMessage";
-    $params = ['chat_id' => TELEGRAM_CHAT_ID, 'text' => $message, 'parse_mode' => 'Markdown'];
+    $params = ['chat_id' => $chatId, 'text' => $message, 'parse_mode' => 'Markdown'];
     if ($replyMarkup) $params['reply_markup'] = $replyMarkup;
     $ch = curl_init();
     curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $params, CURLOPT_RETURNTRANSFER => true]);
@@ -210,13 +210,25 @@ function sendMessageToTelegram($message, $replyMarkup = null) {
     curl_close($ch);
 }
 
-function sendMediaGroupToTelegram($media) {
+function sendMessageToAdmins($message, $replyMarkup = null) {
+    foreach (TELEGRAM_ADMIN_IDS as $chatId) {
+        sendMessageToTelegram($chatId, $message, $replyMarkup);
+    }
+}
+
+function sendMediaGroupToTelegram($chatId, $media) {
     $url = "https://api.telegram.org/bot" . TELEGRAM_TOKEN . "/sendMediaGroup";
-    $params = ['chat_id' => TELEGRAM_CHAT_ID, 'media' => json_encode($media)];
+    $params = ['chat_id' => $chatId, 'media' => json_encode($media)];
     $ch = curl_init();
     curl_setopt_array($ch, [CURLOPT_URL => $url, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $params, CURLOPT_RETURNTRANSFER => true]);
     curl_exec($ch);
     curl_close($ch);
+}
+
+function sendMediaGroupToAdmins($media) {
+    foreach (TELEGRAM_ADMIN_IDS as $chatId) {
+        sendMediaGroupToTelegram($chatId, $media);
+    }
 }
 
 function str_split_telegram($text, $limit) {
