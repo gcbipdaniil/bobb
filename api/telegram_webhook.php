@@ -144,6 +144,14 @@ if (isset($update['callback_query'])) {
 elseif (isset($update['message'])) {
     $message = $update['message'];
     $chatId = $message['chat']['id'];
+    $text = $message['text'] ?? '';
+
+    // Command /getid works in any chat
+    if ($text === '/getid') {
+        $responseText = "ID этого чата: `" . escapeMarkdown($chatId) . "`";
+        sendMessageToTelegram($chatId, $responseText);
+        exit();
+    }
 
     // 2.1. ОБРАБОТКА КОМАНД АДМИНА
     if (isset($message['text']) && $chatId == TELEGRAM_CHAT_ID) {
