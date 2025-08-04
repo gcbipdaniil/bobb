@@ -37,7 +37,7 @@
             margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding-bottom: 20px;
         }
-        .control-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .control-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
         .control-row button {
             background: rgba(0,0,0,0.2); border: 1px solid transparent;
             color: var(--text-color); padding: 8px 16px;
@@ -147,33 +147,53 @@
             animation-delay: calc(var(--animation-order) * 60ms);
         }
 
-        .info-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1001;
-            background-color: rgba(26, 26, 26, 0.6);
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .info-modal-overlay.visible { opacity: 1; visibility: visible; }
-        .info-modal-box {
-            background: var(--card-bg-color, rgba(48, 72, 40, 0.25));
-            backdrop-filter: blur(var(--blur-value, 50px));
-            -webkit-backdrop-filter: blur(var(--blur-value, 50px));
-            border-radius: var(--border-radius-main, 24px);
+        .info-tooltip {
+            position: absolute;
+            bottom: 120%; /* Position above the button */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            background-color: #2c2c2c;
+            color: #fff;
+            text-align: left;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            width: 90%; max-width: 450px;
-            padding: 30px; text-align: center;
-            transform: scale(0.9); opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
         }
-        .info-modal-overlay.visible .info-modal-box { transform: scale(1); opacity: 1; }
-        .info-modal-box h3 { font-size: 1.6rem; font-weight: 700; color: var(--accent-color, #fff); margin-bottom: 15px; }
-        .info-modal-box p, .info-modal-box ul { font-size: 1rem; line-height: 1.6; color: var(--text-color, #e0e0e0); margin-bottom: 25px; text-align: left; }
-        .info-modal-box ul { list-style-position: inside; padding-left: 10px;}
-        .info-modal-box button { flex-grow: 1; }
+        .info-tooltip.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-10px);
+        }
+        .info-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2c2c2c transparent transparent transparent;
+        }
+        .info-tooltip h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+        .info-tooltip p, .info-tooltip ul {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .info-tooltip ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
 
         @media (max-width: 768px) {
             .rating-widget { padding: 15px; }
@@ -205,11 +225,9 @@
 </head>
 <body>
     <div id="rating-widget-container"></div>
-    <div id="info-modal-container"></div>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const container = document.getElementById('rating-widget-container');
-            const modalContainer = document.getElementById('info-modal-container');
             if (!container) return;
 
             let fullData = {};
@@ -228,31 +246,6 @@
                 const height = document.body.scrollHeight;
                 window.parent.postMessage({ type: 'resize-iframe', height: height }, '*');
             };
-
-            function showInfoModal(title, message) {
-                const modalOverlay = document.createElement('div');
-                modalOverlay.className = 'info-modal-overlay';
-                modalOverlay.innerHTML = `
-                    <div class="info-modal-box">
-                        <h3>${title}</h3>
-                        <div>${message}</div>
-                        <button class="btn">Понятно</button>
-                    </div>
-                `;
-                modalContainer.appendChild(modalOverlay);
-
-                setTimeout(() => modalOverlay.classList.add('visible'), 10);
-
-                const close = () => {
-                    modalOverlay.classList.remove('visible');
-                    setTimeout(() => modalOverlay.remove(), 300);
-                };
-
-                modalOverlay.querySelector('button').addEventListener('click', close);
-                modalOverlay.addEventListener('click', (e) => {
-                    if (e.target === modalOverlay) close();
-                });
-            }
 
             function getScoreLabel(ratingType) {
                 if (ratingType === 'posts') return 'Посты';
@@ -283,6 +276,21 @@
                         </div>`;
                 }
                 return `<div class="character-entry" data-id="${uniqueId}" style="--animation-order: ${index};">${contentHtml}</div>`;
+            }
+
+            function createTooltip() {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'info-tooltip';
+                tooltip.innerHTML = `
+                    <h4>Как считается общий рейтинг?</h4>
+                    <p>Индекс общего рейтинга — это оценка активности персонажа, где посты имеют больший вес, чем флуд.</p>
+                    <ul>
+                        <li><b>Вес постов:</b> 70%</li>
+                        <li><b>Вес флуда:</b> 30%</li>
+                    </ul>
+                    <p>Максимально возможный индекс — 10.</p>
+                `;
+                return tooltip;
             }
 
             function render() {
@@ -343,6 +351,22 @@
                         });
                     }
 
+                    const overallRatingBtnContainer = widget.querySelector('#overall-rating-btn').parentElement;
+                    const tooltip = createTooltip();
+                    overallRatingBtnContainer.style.position = 'relative'; // Needed for absolute positioning of tooltip
+                    overallRatingBtnContainer.appendChild(tooltip);
+
+                    widget.querySelector('#overall-rating-btn .help-icon').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        tooltip.classList.toggle('visible');
+                    });
+
+                    document.addEventListener('click', (e) => {
+                        if (!tooltip.contains(e.target) && !widget.querySelector('#overall-rating-btn .help-icon').contains(e.target)) {
+                            tooltip.classList.remove('visible');
+                        }
+                    });
+
                     widget.querySelector('#rating-type-selector').addEventListener('click', (e) => {
                         const button = e.target.closest('button');
                         if (button && button.dataset.type && button.dataset.type !== currentRatingType) {
@@ -357,19 +381,6 @@
                             currentPeriod = button.dataset.period;
                             render();
                         }
-                    });
-
-                    widget.querySelector('#overall-rating-btn .help-icon').addEventListener('click', (e) => {
-                        e.stopPropagation(); // Prevent the button click from firing
-                        showInfoModal(
-                            'Как считается общий рейтинг?',
-                            'Индекс общего рейтинга — это оценка активности персонажа, где посты имеют больший вес, чем флуд.<br><br>' +
-                            '<ul>' +
-                            '<li><b>Вес постов:</b> 70%</li>' +
-                            '<li><b>Вес флуда:</b> 30%</li>' +
-                            '</ul>' +
-                            'Максимально возможный индекс — 10.'
-                        );
                     });
 
                     postHeight();
