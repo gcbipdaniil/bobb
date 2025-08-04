@@ -149,7 +149,7 @@
 
         .info-tooltip {
             position: absolute;
-            bottom: 120%; /* Position above the button */
+            top: 100%; /* Position below the button */
             left: 50%;
             transform: translateX(-50%);
             width: 280px;
@@ -164,21 +164,22 @@
             transition: opacity 0.3s, transform 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px; /* Add some space */
         }
         .info-tooltip.visible {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(-10px);
+            transform: translateX(-50%) translateY(0);
         }
         .info-tooltip::after {
             content: '';
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 50%;
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: #2c2c2c transparent transparent transparent;
+            border-color: transparent transparent #2c2c2c transparent;
         }
         .info-tooltip h4 {
             margin: 0 0 10px 0;
@@ -356,9 +357,17 @@
                     overallRatingBtnContainer.style.position = 'relative'; // Needed for absolute positioning of tooltip
                     overallRatingBtnContainer.appendChild(tooltip);
 
+                    let tooltipTimeout;
                     widget.querySelector('#overall-rating-btn .help-icon').addEventListener('click', (e) => {
                         e.stopPropagation();
                         tooltip.classList.toggle('visible');
+
+                        clearTimeout(tooltipTimeout);
+                        if (tooltip.classList.contains('visible')) {
+                            tooltipTimeout = setTimeout(() => {
+                                tooltip.classList.remove('visible');
+                            }, 10000);
+                        }
                     });
 
                     document.addEventListener('click', (e) => {
