@@ -184,4 +184,13 @@
         grid-template-columns: 1fr;
         gap: 30px;
     }
+    .admin-card,
+    .admin-card:nth-child(1),
+    .admin-card:nth-child(2),
+    .admin-card:nth-child(3),
+    .admin-card:nth-child(4),
+    .admin-card:nth-child(5) {
+        grid-column: auto;
+        grid-row: auto;
+    }
 }
