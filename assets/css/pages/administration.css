@@ -19,54 +19,157 @@
 
 .admin-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
     max-width: 1200px;
     margin: 0 auto 50px;
     padding: 0 20px;
 }
 
 .admin-card {
-    background: rgba(20, 20, 20, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
     border-radius: var(--border-radius-main);
-    text-align: center;
-    padding: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #1a1a1a;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
+
 .admin-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.admin-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    filter: blur(8px) grayscale(0.5);
+    transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.admin-card:hover .admin-card-bg {
+    opacity: 0.4;
+    filter: blur(4px) grayscale(0);
+}
+
+.admin-card-content {
+    position: relative;
+    z-index: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 380px;
+    justify-content: space-between;
 }
 
 .admin-photo-wrapper {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     overflow: hidden;
-    margin: 0 auto 20px;
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.4s ease;
 }
+
+.admin-card:hover .admin-photo-wrapper {
+    transform: scale(1.05);
+}
+
 .admin-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.admin-role {
-    font-size: 1.2rem;
+.admin-info {
+    margin-bottom: 20px;
+}
+
+.admin-role, .admin-username {
+    position: relative;
     font-weight: 700;
+}
+
+.admin-role {
+    font-size: 1.4rem;
     color: var(--accent-color);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .admin-username {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.1rem;
     color: var(--text-color);
     opacity: 0.8;
+}
+
+/* Glitch Effect */
+.admin-role::before, .admin-role::after,
+.admin-username::before, .admin-username::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.admin-card:hover .admin-role::before,
+.admin-card:hover .admin-username::before {
+    left: 2px;
+    text-shadow: -1px 0 red;
+    animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
+}
+
+.admin-card:hover .admin-role::after,
+.admin-card:hover .admin-username::after {
+    left: -2px;
+    text-shadow: -1px 0 blue;
+    animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(15% 0 86% 0); opacity: 1; }
+    25% { clip-path: inset(55% 0 23% 0); opacity: 1; }
+    50% { clip-path: inset(23% 0 49% 0); opacity: 1; }
+    75% { clip-path: inset(80% 0 1% 0); opacity: 1; }
+    100% { clip-path: inset(42% 0 55% 0); opacity: 1; }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(76% 0 1% 0); opacity: 1; }
+    25% { clip-path: inset(12% 0 50% 0); opacity: 1; }
+    50% { clip-path: inset(90% 0 3% 0); opacity: 1; }
+    75% { clip-path: inset(42% 0 19% 0); opacity: 1; }
+    100% { clip-path: inset(6% 0 91% 0); opacity: 1; }
+}
+
+.admin-contact-btn {
+    width: 100%;
+    padding: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--accent-color);
+    background: transparent;
+    color: var(--accent-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-contact-btn:hover {
+    background-color: var(--accent-color);
+    color: #1a1a1a;
 }
 
 .admin-note {
@@ -84,6 +187,6 @@
     }
     .admin-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
     }
 }

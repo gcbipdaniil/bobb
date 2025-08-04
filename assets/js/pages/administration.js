@@ -23,15 +23,22 @@ function initializeAdministrationPage() {
             const card = document.createElement('div');
             card.className = 'admin-card';
 
-            const photoSrc = admin.photo || 'assets/images/empty.webp';
-            const username = admin.username || 'N/A';
+            const photoSrc = admin.photo || 'assets/images/tg_avatar_placeholder.png';
+            const username = admin.username || '';
+            const tgLink = username ? `https://t.me/${username.replace('@', '')}` : '#';
 
             card.innerHTML = `
-                <div class="admin-photo-wrapper">
-                    <img src="${photoSrc}" alt="${admin.role}" class="admin-photo">
+                <div class="admin-card-bg" style="background-image: url('${photoSrc}')"></div>
+                <div class="admin-card-content">
+                    <div class="admin-photo-wrapper">
+                        <img src="${photoSrc}" alt="Фото ${admin.role}" class="admin-photo">
+                    </div>
+                    <div class="admin-info">
+                        <h3 class="admin-role" data-text="${admin.role}">${admin.role}</h3>
+                        <p class="admin-username" data-text="${username}">${username}</p>
+                    </div>
+                    ${username ? `<a href="${tgLink}" class="btn admin-contact-btn" target="_blank" rel="noopener noreferrer">Связаться</a>` : ''}
                 </div>
-                <h3 class="admin-role">${admin.role}</h3>
-                <p class="admin-username">${username}</p>
             `;
             adminGrid.appendChild(card);
         });
